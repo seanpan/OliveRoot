@@ -6,11 +6,6 @@ var keywords = ['extend', 'mixin', 'statics'];
 //TODO object or function both support, for private member injection
 exports.define = function (options) {
     var klass = function () {
-        //initialize
-        var initialize = options.initialize || this.initialize;
-        if (_.isFunction(initialize))
-            initialize.apply(this, arguments);
-
         var self = this;
 
         //mixin
@@ -35,6 +30,11 @@ exports.define = function (options) {
                 return;
             self[key] = value;
         });
+
+        //initialize
+        var initialize = options.initialize || this.initialize;
+        if (_.isFunction(initialize))
+            initialize.apply(this, arguments);
     };
 
     //extend
