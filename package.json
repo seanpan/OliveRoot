@@ -1,0 +1,25 @@
+{
+  "name": "root",
+  "version": "1.0.0",
+  "description": "A class system base.",
+  "main": "root.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanpan/Root.git"
+  },
+  "keywords": [
+    "class"
+  ],
+  "author": "sean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanpan/Root/issues"
+  },
+  "homepage": "https://github.com/seanpan/Root#readme",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
