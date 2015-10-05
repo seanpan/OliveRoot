@@ -24,11 +24,18 @@ var MyClass = root.define({
         staticMember: function () {
             console.log('static member called with params', arguments);
         }
+    },
+    customizedMember: function () {
+        console.log('customizedMember in my.');
     }
 });
 
 var ChildClass = root.define({
-    extend: MyClass
+    extend: MyClass,
+    customizedMember: function(){
+        this.callParent();
+        console.log('customizedMember in child.');
+    }
 });
 
 var parentInstance = new ParentClass('parent');
