@@ -1,6 +1,6 @@
 {
   "name": "oliveroot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A class system base.",
   "main": "root.js",
   "scripts": {
