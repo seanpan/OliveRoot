@@ -28,7 +28,7 @@ var mixinClass = function (self, mixin) {
 
     if (_.isObject(mixin)) {
         if (_.isFunction(mixin)) {
-            mix(new mixin());
+            mix(mixin.prototype);
             return;
         }
         if (_.isArray(mixin)) {
@@ -71,8 +71,8 @@ exports.define = function (cfg) {
         if (val.$isFunction) {
             val.$name = p;
             val.$ownerClass = fn;
-            _proto[p] = val;
         }
+        _proto[p] = val;
     }
     fn.$superClassName = superClass;
     return fn;
