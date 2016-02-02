@@ -3,6 +3,9 @@ var A = Root.define({
     a: 1
 });
 var B = Root.define({
+    initialize: function () {
+        console.log('init...')
+    },
     mixin: {
         a: 2,
         b: 3

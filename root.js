@@ -56,6 +56,10 @@ Base.prototype.callParent = function () {
 
 exports.define = function (cfg) {
     var fn = function () {
+        //initialize
+        var initialize = cfg.initialize || this.initialize;
+        if (_.isFunction(initialize))
+            initialize.apply(this, arguments);
     };
     var val,
         superClass = cfg.extend || Base;
@@ -75,5 +79,6 @@ exports.define = function (cfg) {
         _proto[p] = val;
     }
     fn.$superClassName = superClass;
+
     return fn;
 };
