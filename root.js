@@ -55,11 +55,12 @@ Base.prototype.callParent = function () {
 };
 
 exports.define = function (cfg) {
-    var fn = function () {
+    var fn = function (opts) {
         //initialize
         var initialize = cfg.initialize || this.initialize;
         if (_.isFunction(initialize))
             initialize.apply(this, arguments);
+        this.options = opts;
     };
     var val,
         superClass = cfg.extend || Base;

@@ -30,6 +30,6 @@ var BBB = Root.define({
         this.callParent(cnt);
     }
 });
-var bb = new BBB();
+var bb = new BBB({c: 2});
 bb.say("-say");
-console.log(bb.a);
+console.log(bb.a, bb.options);
