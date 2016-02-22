@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var keywords = ['extend', 'mixin', 'statics'];
+var keywords = ['autoInit', 'extend', 'mixin', 'statics'];
 
 Function.prototype.$isFunction = true;
 
@@ -18,10 +18,15 @@ var mixinClass = function (self, mixin) {
     if (!self || !mixin) {
         return;
     }
+    var args = arguments;
     var mix = function (mixin) {
         _.each(mixin, function (value, key) {
-            if (key in keywords)
+            if (key === 'autoInit') {
+                value(self);
+            }
+            if (_.indexOf(keywords, key) > -1) {
                 return;
+            }
             self.prototype[key] = value;
         });
     };
@@ -33,7 +38,7 @@ var mixinClass = function (self, mixin) {
         }
         if (_.isArray(mixin)) {
             _.each(mixin, function (oneMixin) {
-                mix(oneMixin);
+                args.callee(self, oneMixin);
             });
             return;
         }
@@ -56,11 +61,11 @@ Base.prototype.callParent = function () {
 
 exports.define = function (cfg) {
     var fn = function (opts) {
+        this.options = opts || {};
         //initialize
         var initialize = cfg.initialize || this.initialize;
         if (_.isFunction(initialize))
             initialize.apply(this, arguments);
-        this.options = opts;
     };
     var val,
         superClass = cfg.extend || Base;
@@ -79,7 +84,5 @@ exports.define = function (cfg) {
         }
         _proto[p] = val;
     }
-    fn.$superClassName = superClass;
-
     return fn;
 };
